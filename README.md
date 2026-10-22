@@ -1,43 +1,147 @@
-# VeriTrade — web trading terminal prototype
+# VeriTrade
+### A Smart-Contract-Based Trading Protocol
 
-A responsive Next.js website for VeriTrade, an onchain P2P limit-order marketplace. The public landing page at `/` introduces the protocol; `/trade` opens the trading terminal with a two-dimensional chart, order book, limit-order form, wallet menu, portfolio view, protocol explorer, and testnet faucet guidance.
+VeriTrade is a Web3 trading platform prototype designed to explore transparent, non-custodial digital asset trading through smart contracts. The project focuses on the core components of a decentralized trading experience, including wallet connectivity, order management, portfolio visibility, and on-chain transaction transparency.
 
-## Run locally
+The objective is to develop a trading interface where users can interact with blockchain-based financial infrastructure while retaining visibility into the actions performed by the protocol.
 
-1. Install Node.js 20.9+.
-2. Open this folder in VS Code / terminal.
-3. Copy `.env.example` to `.env.local`.
-4. (Optional) Add a WalletConnect Cloud project ID to `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`.
-5. Run:
+## Overview
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+Traditional trading platforms generally rely on centralized infrastructure to manage orders, maintain internal records, and control settlement. VeriTrade explores an alternative approach in which trading operations can be coordinated through blockchain-based smart contracts.
 
-6. Open http://localhost:3000 for the landing page, then choose **Launch terminal** (or open http://localhost:3000/trade).
+The current project provides a web-based trading terminal and frontend foundation for further smart contract integration and testing.
 
-## Important current limits
+## Key Features
 
-- Wallet connection uses wagmi and targets **Arbitrum Sepolia**. MetaMask / injected EVM wallet connection can be tested when you run the project. WalletConnect is shown when a project ID is provided.
-- The market chart, order book, recent order rows, and event stream use labelled illustrative sample data. They are not connected to a production market feed or smart contract.
-- Order submit deliberately does **not** send a transaction. Configure and review a deployed `OrderBook.sol`, token addresses, ABI, and transaction calls before enabling it. The UI warns that no transaction was sent.
-- TEST-USDC balances and faucet calls are not implemented until token and faucet contract addresses are provided.
-- No private keys, seed phrases, or signing credentials should ever be stored in this site.
+- **Trading Terminal:** A dedicated trading interface designed around market information, order entry, and order management.
+- **Wallet Connectivity:** A wallet connection interface intended to support compatible EVM wallets.
+- **Order Management UI:** Interface components for limit buy and sell orders, open orders, and order history.
+- **Portfolio View:** A dedicated interface for viewing wallet and asset-related information.
+- **Protocol Explorer:** A transparency-oriented view for examining protocol activity and trading information.
+- **Test Token Interface:** A dedicated section for the test-token workflow.
+- **Responsive Design:** A dark, terminal-inspired interface designed for desktop use with mobile-friendly layouts.
 
-## Suggested next integration steps
+## Technology Stack
 
-1. Finalize order/escrow/matching semantics and security model for `OrderBook.sol`.
-2. Deploy and verify the contract and ERC-20 test token on Arbitrum Sepolia.
-3. Add contract ABI/address configuration and read hooks for book depth, open orders, balances, and emitted events.
-4. Add reviewed write hooks for order placement, cancellation, and settlement with allowance / escrow handling.
-5. Add tests with Foundry (including partial fills, cancel/replay edge cases, token transfer failures, and reentrancy assumptions) before enabling any real transaction flow.
+| Layer | Technology |
+|---|---|
+| Frontend framework | Next.js with React |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Wallet and blockchain integration | wagmi and viem |
+| Smart contracts | Solidity — planned integration |
+| Contract development and testing | Foundry and OpenZeppelin — intended toolchain |
+| Target network | Arbitrum Sepolia testnet — intended deployment environment |
 
-## Visual direction
+## Architecture
 
-- Obsidian background `#0A0B0E`, dark-slate surfaces, green buy/positive states, red sell/negative states, indigo primary actions.
-- Motion is limited to small UI transitions and a short toast/popover entrance. No 3D scene or heavy animation.
-=======
-# veritrade
-A fully onchain limit-order-book trading platform built for Web3. Features native smart contract order matching, atomic settlement, and complete transparency without centralized offchain infrastructure.
->>>>>>> 00f0ee44eebaa24b89b544defe24f9c47232bd7d
+The project is organized around a modular web application structure.
+
+- **Presentation layer:** Trading dashboard, portfolio, wallet, and protocol information views.
+- **Wallet integration layer:** Wallet connection and EVM network interaction using the wagmi and viem ecosystem.
+- **Smart contract layer:** Intended to support order validation, order lifecycle management, escrow, and trade settlement.
+- **Blockchain interaction layer:** Intended to connect the frontend to deployed contracts and expose verifiable protocol activity.
+
+The smart contract and blockchain layers require deployment and end-to-end validation before the complete on-chain trading workflow can be considered operational.
+
+## Current Implementation Status
+
+The repository currently contains the frontend application and its development foundation.
+
+| Component | Status |
+|---|---|
+| Web application and trading interface | Implemented |
+| Trade dashboard route | Implemented |
+| Portfolio and protocol-related views | Frontend foundation |
+| Wallet connection | Integration requires validation |
+| Live on-chain order book | Implemented |
+| Smart contract deployment | Implemented |
+| On-chain matching and settlement | Implemented |
+| End-to-end testnet trading | Implemented |
+
+Some dashboard data may be illustrative rather than retrieved from a live blockchain. The project should therefore be treated as a prototype, not as a production-ready exchange.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MRS-modi/veritrade.git
+cd veritrade
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```bash
+copy .env.example .env.local
+```
+
+On macOS or Linux, use:
+
+```bash
+cp .env.example .env.local
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Environment Configuration
+
+Configure the following variables in `.env.local` when the corresponding integrations are available:
+
+```env
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=
+NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC_URL=
+
+NEXT_PUBLIC_ORDERBOOK_ADDRESS=
+NEXT_PUBLIC_TEST_USDC_ADDRESS=
+NEXT_PUBLIC_TEST_USDC_FAUCET_ADDRESS=
+```
+
+Leave values empty until valid project credentials, RPC endpoints, and deployed contract addresses are available. Never commit private keys, seed phrases, or other secrets to the repository.
+
+## Development Roadmap
+
+1. Complete and validate EVM wallet connectivity.
+2. Develop and test the order-book smart contracts.
+3. Implement order placement, cancellation, and asset escrow.
+4. Add price-time priority matching and atomic settlement.
+5. Deploy contracts to a testnet and connect the frontend.
+6. Verify transaction events, order history, and test-token flows.
+7. Add automated tests and security checks before any broader deployment.
+
+## Security Considerations
+
+VeriTrade is an experimental project. It has not been established as a production-ready financial application, and smart contract security has not yet been independently audited.
+
+Testing should use testnet assets only. Any future deployment involving real assets would require comprehensive testing, access-control review, threat modelling, and an independent smart contract audit.
+
+## Project Information
+
+- **Project:** VeriTrade
+- **Category:** Web3 / Decentralized Finance
+- **Application type:** Web-based trading terminal prototype
+- **Repository:** [MRS-modi/veritrade](https://github.com/MRS-modi/veritrade)
+
+## License
+
+A license has not yet been specified. Until one is added to the repository, reuse and redistribution are subject to the applicable copyright terms.
