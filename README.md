@@ -37,3 +37,7 @@ A responsive Next.js website for VeriTrade, an onchain P2P limit-order marketpla
 
 - Obsidian background `#0A0B0E`, dark-slate surfaces, green buy/positive states, red sell/negative states, indigo primary actions.
 - Motion is limited to small UI transitions and a short toast/popover entrance. No 3D scene or heavy animation.
+=======
+# veritrade
+A fully onchain limit-order-book trading platform built for Web3. Features native smart contract order matching, atomic settlement, and complete transparency without centralized offchain infrastructure.
+>>>>>>> 00f0ee44eebaa24b89b544defe24f9c47232bd7d
